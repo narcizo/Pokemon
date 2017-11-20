@@ -15,6 +15,7 @@ public class LerCSV {
         public void ler() {
             int i = 0;
             int j = 0;
+            int k;
 
             try {
                 conteudoCsv = new BufferedReader(new FileReader(csvArq));//abre arquivo e cria objeto
