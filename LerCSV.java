@@ -36,6 +36,7 @@ public class LerCSV {
                 System.out.println("Erro de IO: \n" + e.getMessage());
             } finally {
                 //if (conteudoCsv);
+                //
             }
         }
 }
