@@ -4,17 +4,21 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Vector;
+import Pokemon.Pokemon;
 
 public class Batalha {
     private BufferedReader conteudoCsv = null;
-
     private String linha;
-
     private String separador = "\t";
-
     private String [][] tabelaEspecie = new String[153][9];
     private String [][] tabelaAtaque = new String[167][8];
 
+    private List<Pokemon> jogador1 = new ArrayList<Pokemon>();
+    private List<Pokemon> jogador2 = new ArrayList<Pokemon>();
 
     public void carregarTabelas(String arq, int chave){
         int i = 0, j = 0;
@@ -31,7 +35,6 @@ public class Batalha {
                 }
                 j = 0;
                 i++;
-                System.out.println();
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo nao encontrado: \n" + e.getMessage());
@@ -46,8 +49,18 @@ public class Batalha {
 
     }
 
-    public void inicializarJogadores(){
+    public void inicializarJogadores(int i, int chave){
+        if(i>1 && i<153) {
+            System.out.println("seu pokemon e: " + tabelaEspecie[i][1]);
+            Pokemon poke = new Pokemon(tabelaEspecie[i][4], tabelaEspecie[i][5], tabelaEspecie[i][6], tabelaEspecie[i][7], tabelaEspecie[i][8], tabelaEspecie[i][1]);
+            if(chave == 1)
+                jogador1.add(poke);
+            else
+                jogador2.add(poke);
 
+        }
+        else
+            System.out.println("Escolha um Pokemon valido.");
     }
 
     public void executarTurno(){
@@ -65,10 +78,19 @@ public class Batalha {
 
     public void printaEspecie(){
         for(int i = 0; i < 153; i++){
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 9; j++)
                 System.out.printf(tabelaEspecie[i][j] + "\t");
             System.out.println();
         }
         System.out.println();
     }
+
+    public List<Pokemon> getJogador1() {
+        return jogador1;
+    }
+
+    public List<Pokemon> getJogador2() {
+        return jogador2;
+    }
+
 }

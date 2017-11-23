@@ -1,6 +1,7 @@
 package Pokemon;
 
 public class Pokemon {
+    private String nome;
     private int level;
     private double hpAtual;
     private double hpMax;
@@ -16,12 +17,30 @@ public class Pokemon {
     private boolean confusion;
     private boolean flinch;
 
+    public Pokemon(String hp, String atk, String def, String spe, String spd, String nome){
+        this.hpMax = Integer.parseInt(hp);
+        this.atk = Integer.parseInt(atk);
+        this.def = Integer.parseInt(def);
+        this.spe = Integer.parseInt(spe);
+        this.spd = Integer.parseInt(spd);
+        this.nome = nome;
+    }
+
     public double valorAtributo(){
         return 0;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public int getLevel() {
         return level;
+
     }
 
     public void setLevel(int level) {
