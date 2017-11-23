@@ -50,9 +50,17 @@ public class Batalha {
     }
 
     public void inicializarJogadores(int i, int chave){
+        Scanner input = new Scanner(System.in);
+        int a;
+
         if(i>1 && i<153) {
             System.out.println("seu pokemon e: " + tabelaEspecie[i][1]);
-            Pokemon poke = new Pokemon(tabelaEspecie[i][4], tabelaEspecie[i][5], tabelaEspecie[i][6], tabelaEspecie[i][7], tabelaEspecie[i][8], tabelaEspecie[i][1]);
+            do{
+                System.out.println("Escolha um level entre 1 e 100");
+                a = input.nextInt();
+            }while(a < 0 || a > 100);
+            criaAtaque(i);
+            Pokemon poke = new Pokemon(tabelaEspecie[i][4], tabelaEspecie[i][5], tabelaEspecie[i][6], tabelaEspecie[i][7], tabelaEspecie[i][8], tabelaEspecie[i][1], a);
             if(chave == 1)
                 jogador1.add(poke);
             else
@@ -61,6 +69,10 @@ public class Batalha {
         }
         else
             System.out.println("Escolha um Pokemon valido.");
+    }
+
+    public void criaAtaque(int i){
+
     }
 
     public void executarTurno(){

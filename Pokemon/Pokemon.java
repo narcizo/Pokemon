@@ -1,5 +1,11 @@
 package Pokemon;
 
+import java.util.ArrayList;
+import java.util.List;
+import Ataque.Ataque;
+import Enum.Status;
+import Enum.Tipo;
+
 public class Pokemon {
     private String nome;
     private int level;
@@ -10,20 +16,25 @@ public class Pokemon {
     private double spe;
     private double spd;
     private int modifierAccuracy;
+    private int modifierEvasion;
     private int modifierAtk;
     private int modifierDef;
     private int modifierSpe;
     private int modifierSpd;
     private boolean confusion;
     private boolean flinch;
+    List<Ataque> ataque = new ArrayList<Ataque>();
+    Status status;
+    Tipo tipo;
 
-    public Pokemon(String hp, String atk, String def, String spe, String spd, String nome){
+    public Pokemon(String hp, String atk, String def, String spe, String spd, String nome, int level){
         this.hpMax = Integer.parseInt(hp);
         this.atk = Integer.parseInt(atk);
         this.def = Integer.parseInt(def);
         this.spe = Integer.parseInt(spe);
         this.spd = Integer.parseInt(spd);
         this.nome = nome;
+        this.level = level;
     }
 
     public double valorAtributo(){
@@ -149,5 +160,13 @@ public class Pokemon {
 
     public void setFlinch(boolean flinch) {
         this.flinch = flinch;
+    }
+
+    public int getModifierEvasion() {
+        return modifierEvasion;
+    }
+
+    public void setModifierEvasion(int modifierEvasion) {
+        this.modifierEvasion = modifierEvasion;
     }
 }
