@@ -2,11 +2,11 @@ package Main;
 
 public class Main {
     Main(){
-        LerCSV ler = new LerCSV();
-        ler.lerArq("/home/narcizo/Documents/TrabalhoPPIOO 2017/TabelaDeEspecies.txt", 1);
-        ler.lerArq("/home/narcizo/Documents/TrabalhoPPIOO 2017/TabelaDeAtaques.txt", 2);
-        ler.printaAtaque();
+        Batalha treta = new Batalha();
+        treta.carregarTabelas("src/TabelaDeEspecies.txt", 1);
+        treta.carregarTabelas("src/TabelaDeAtaques.txt", 2);
+        treta.printaAtaque();
         System.out.println();
-        //ler.printaEspecie();
+        treta.printaEspecie();
     }
 }
