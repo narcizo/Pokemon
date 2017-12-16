@@ -1,15 +1,21 @@
 package Main;
 
+import Jogador.Jogador;
 import Pokemon.Pokemon;
+import Jogador.Humano;
+import Jogador.Maquina;
 
 import java.util.Scanner;
 
 public class Main {
     private double versao = 0.1;
     private Scanner input = new Scanner(System.in);
+    Jogador jogador1;
+    Jogador jogador2;
 
 
     Main(){
+
         Batalha treta = new Batalha();
 
         treta.carregarTabelas("src/TabelaDeEspecies.txt", 1);
@@ -20,9 +26,36 @@ public class Main {
         escolhePokemon1(treta);
         escolhePokemon2(treta);
 
+        escolheJogador();
+
+        treta.printaListaPokemon();
         //treta.printaAtaque();
         //System.out.println();
         //treta.printaEspecie();
+    }
+
+    private void escolheJogador(){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Modo de Jogo:\nPvP(0)\nPvM(1)\nMvM(2)");
+
+        switch (scan.nextInt()){
+            case 0:
+                jogador1 = new Humano();
+                jogador2 = new Humano();
+                break;
+            case 1:
+                jogador1 = new Humano();
+                jogador2 = new Maquina();
+                break;
+            case 2:
+                jogador1 = new Maquina();
+                jogador2 = new Maquina();
+                break;
+            default:
+                System.out.println("Escolha uma entrada valida");
+                escolheJogador();
+        }
     }
 
     private void escolhePokemon1(Batalha treta){

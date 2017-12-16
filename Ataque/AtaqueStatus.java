@@ -3,6 +3,18 @@ package Ataque;
 public class AtaqueStatus extends Ataque{
     private int status;
     private int chance;
+    private int id;
+    private String nome;
+    private String tipo;
+    private double ppMax;
+    private double ppAtual;
+    private double power;
+    private double accuracy;
+    private String classe;
+
+    public AtaqueStatus(int linha, String[][] tabelaAtaque) {
+        super(linha, tabelaAtaque);
+    }
 
     public int getStatus() {
         return status;

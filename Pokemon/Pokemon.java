@@ -169,4 +169,28 @@ public class Pokemon {
     public void setModifierEvasion(int modifierEvasion) {
         this.modifierEvasion = modifierEvasion;
     }
+
+    public List<Ataque> getAtaque() {
+        return ataque;
+    }
+
+    public Ataque getAtaque1(int id){
+        return ataque.get(id);
+    }
+
+    public void setAtaque(Ataque ataque) {
+        this.ataque.add(ataque);
+        for (Ataque a: this.ataque) {
+            System.out.println(a.getNome());
+        }
+    }
+
+    public Enum getStatus() {
+        return status;
+    }
+
+    public Enum getTipo() {
+        return tipo;
+    }
+
 }

@@ -4,6 +4,18 @@ public class AtaqueModifier extends Ataque{
     private int mod;
     private int n;
     private int chance;
+    private int id;
+    private String nome;
+    private String tipo;
+    private double ppMax;
+    private double ppAtual;
+    private double power;
+    private double accuracy;
+    private String classe;
+
+    public AtaqueModifier(int linha, String[][] tabelaAtaque) {
+        super(linha, tabelaAtaque);
+    }
 
     public int getMod() {
         return mod;

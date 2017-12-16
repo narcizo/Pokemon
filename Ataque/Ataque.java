@@ -3,10 +3,23 @@ package Ataque;
 public class Ataque {
     private int id;
     private String nome;
+    private String tipo;
     private double ppMax;
     private double ppAtual;
     private double power;
     private double accuracy;
+    private String classe;
+
+    public Ataque(int linha, String[][] tabelaAtaque) {
+        this.id = Integer.parseInt(tabelaAtaque[linha][0]);
+        this.nome = tabelaAtaque[linha][1];
+        this.tipo = tabelaAtaque[linha][2];
+        this.ppMax = Integer.parseInt(tabelaAtaque[linha][3]);
+        this.ppAtual = this.ppMax;
+        this.power = Integer.parseInt(tabelaAtaque[linha][4]);
+        this.accuracy = Integer.parseInt(tabelaAtaque[linha][5]);
+        this.classe = tabelaAtaque[linha][6];
+    }
 
     public void efeito(){
 
