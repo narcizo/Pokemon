@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
+
 import Pokemon.Pokemon;
 import Ataque.Ataque;
 import Ataque.AtaqueHP;
@@ -31,11 +29,13 @@ public class Batalha {
     private BufferedReader conteudoCsv = null;
     private String linha;
     private String separador = "\t";
+    private String separadorJogador = " ";
     private String [][] tabelaEspecie = new String[153][9];
     private String [][] tabelaAtaque = new String[167][8];
+    private List<Integer> inputJogador = new ArrayList<Integer>();
 
-    private List<Pokemon> jogador1 = new ArrayList<Pokemon>();
-    private List<Pokemon> jogador2 = new ArrayList<Pokemon>();
+    private List<Pokemon> listPokemon1 = new ArrayList<Pokemon>();
+    private List<Pokemon> listPokemon2 = new ArrayList<Pokemon>();
 
     Ataque ataque;
 
@@ -74,6 +74,36 @@ public class Batalha {
 
     }
 
+    public List<Integer> carregarJogador(String arq){
+        int i = 0, j = 0;
+
+        try {
+            conteudoCsv = new BufferedReader(new FileReader(arq));//abre arquivo e cria objeto
+            while ((linha = conteudoCsv.readLine()) != null) {
+                String[] camposLidos = linha.split(separadorJogador);
+                for (String s : camposLidos) {
+                    inputJogador.add(Integer.parseInt(s));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(RED + "Arquivo nao encontrado: \n" + RESET + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Indice fora do limite: \n" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Erro de IO: \n" + e.getMessage());
+        } finally {
+            if (conteudoCsv != null){
+                try{
+                    conteudoCsv.close();
+                }catch(IOException e){
+                    System.out.println("Erro de IO (close");
+                }
+            }
+
+        }
+        return inputJogador;
+    }
+
     public void inicializarJogadores(int i, int chave){
         Scanner input = new Scanner(System.in);
         int a, cont = -1;
@@ -84,7 +114,7 @@ public class Batalha {
             do{
                 System.out.println("Escolha um level entre 1 e 100");
                 a = input.nextInt();
-            }while(a < 0 || a > 100);
+            }while(a <= 0 || a > 100);
 
             poke = new Pokemon(tabelaEspecie, i, a);
 
@@ -98,9 +128,9 @@ public class Batalha {
             }while(a >= 0 && ++cont < 3);
 
             if(chave == 1)
-                jogador1.add(poke);
+                listPokemon1.add(poke);
             else
-                jogador2.add(poke);
+                listPokemon2.add(poke);
 
         }
         else
@@ -136,6 +166,7 @@ public class Batalha {
         return ataque;
     }
 
+
     public void executarTurno(){
 
     }
@@ -158,66 +189,67 @@ public class Batalha {
         System.out.println();
     }
 
-    public List<Pokemon> getJogador1() {
-        return jogador1;
+    public List<Pokemon> getListPokemon1() {
+        return listPokemon1;
     }
 
-    public List<Pokemon> getJogador2() {
-        return jogador2;
+    public List<Pokemon> getListPokemon2() {
+        return listPokemon2;
     }
 
     public void printaListaPokemon(){
-        System.out.println("Jogador 1");
-        for(int i = 0; i < this.jogador1.size(); i++){
-            System.out.println(">Nome: "+jogador1.get(i).getNome());
-            System.out.println(">Habilidades: " + jogador1.get(i).getAtaque());
-            for (Ataque j: jogador1.get(i).getAtaque()) {
+        System.out.println(YELLOW + "Jogador 1" + RESET);
+        for(int i = 0; i < this.listPokemon1.size(); i++){
+            System.out.println(">Nome: "+ listPokemon1.get(i).getNome());
+            System.out.println(">Habilidades: " + listPokemon1.get(i).getAtaque());
+            for (Ataque j: listPokemon1.get(i).getAtaque()) {
                 System.out.println(">>>Id: " + j.getId());
                 System.out.println(">>>Nome : " + j.getNome());
                 System.out.println(">>>PPMax: " + j.getPpMax());
                 System.out.println(">>>Power: " + j.getPower());
             }
-            System.out.println(">Atk: "+jogador1.get(i).getAtk());
-            System.out.println(">Def: "+jogador1.get(i).getDef());
-            System.out.println(">Hp atual:"+jogador1.get(i).getHpAtual());
-            System.out.println(">Hp max: >"+jogador1.get(i).getHpMax());
-            System.out.println(">Level: "+jogador1.get(i).getLevel());
-            System.out.println(">Accuracy Modifier: "+jogador1.get(i).getModifierAccuracy());
-            System.out.println(">Atk Modifier: "+jogador1.get(i).getModifierAtk());
-            System.out.println(">Def Modifier: "+jogador1.get(i).getModifierDef());
-            System.out.println(">Evasion Modifier: "+jogador1.get(i).getModifierEvasion());
-            System.out.println(">Spd Modifier: "+jogador1.get(i).getModifierSpd());
-            System.out.println(">Spe Modifier: "+jogador1.get(i).getModifierSpe());
-            System.out.println(">Spd: "+jogador1.get(i).getSpd());
-            System.out.println(">Spe: "+jogador1.get(i).getSpe());
-            System.out.println(">Status: "+jogador1.get(i).getStatus());
+            System.out.println(">Atk: "+ listPokemon1.get(i).getAtk());
+            System.out.println(">Def: "+ listPokemon1.get(i).getDef());
+            System.out.println(">Hp atual:"+ listPokemon1.get(i).getHpAtual());
+            System.out.println(">Hp max: >"+ listPokemon1.get(i).getHpMax());
+            System.out.println(">Level: "+ listPokemon1.get(i).getLevel());
+            System.out.println(">Accuracy Modifier: "+ listPokemon1.get(i).getModifierAccuracy());
+            System.out.println(">Atk Modifier: "+ listPokemon1.get(i).getModifierAtk());
+            System.out.println(">Def Modifier: "+ listPokemon1.get(i).getModifierDef());
+            System.out.println(">Evasion Modifier: "+ listPokemon1.get(i).getModifierEvasion());
+            System.out.println(">Spd Modifier: "+ listPokemon1.get(i).getModifierSpd());
+            System.out.println(">Spe Modifier: "+ listPokemon1.get(i).getModifierSpe());
+            System.out.println(">Spd: "+ listPokemon1.get(i).getSpd());
+            System.out.println(">Spe: "+ listPokemon1.get(i).getSpe());
+            System.out.println(">Status: "+ listPokemon1.get(i).getStatus());
             System.out.println();
         }
         System.out.println();
-        System.out.println("Jogador 2");
-        for(int i = 0; i < this.jogador2.size(); i++){
-            System.out.println(">Nome: "+jogador2.get(i).getNome());
-            System.out.println(">Habilidades: " + jogador2.get(i).getAtaque());
-            for (Ataque j: jogador2.get(i).getAtaque()) {
+        System.out.println(YELLOW + "Jogador 2" + RESET);
+        for(int i = 0; i < this.listPokemon2.size(); i++){
+            System.out.println(">Nome: "+ listPokemon2.get(i).getNome());
+            System.out.println(">Habilidades: " + listPokemon2.get(i).getAtaque());
+            for (Ataque j: listPokemon2.get(i).getAtaque()) {
                 System.out.println(">>>Id: " + j.getId());
                 System.out.println(">>>Nome : " + j.getNome());
                 System.out.println(">>>PPMax: " + j.getPpMax());
                 System.out.println(">>>Power: " + j.getPower());
             }
-            System.out.println(">Atk: "+jogador2.get(i).getAtk());
-            System.out.println(">Def: "+jogador2.get(i).getDef());
-            System.out.println(">Hp atual:"+jogador2.get(i).getHpAtual());
-            System.out.println(">Hp max: >"+jogador2.get(i).getHpMax());
-            System.out.println(">Level: "+jogador2.get(i).getLevel());
-            System.out.println(">Accuracy Modifier: "+jogador2.get(i).getModifierAccuracy());
-            System.out.println(">Atk Modifier: "+jogador2.get(i).getModifierAtk());
-            System.out.println(">Def Modifier: "+jogador2.get(i).getModifierDef());
-            System.out.println(">Evasion Modifier: "+jogador2.get(i).getModifierEvasion());
-            System.out.println(">Spd Modifier: "+jogador2.get(i).getModifierSpd());
-            System.out.println(">Spe Modifier: "+jogador2.get(i).getModifierSpe());
-            System.out.println(">Spd: "+jogador2.get(i).getSpd());
-            System.out.println(">Spe: "+jogador2.get(i).getSpe());
-            System.out.println(">Status: "+jogador2.get(i).getStatus());
+            System.out.println(">Atk: "+ listPokemon2.get(i).getAtk());
+            System.out.println(">Def: "+ listPokemon2.get(i).getDef());
+            System.out.println(">Hp atual:"+ listPokemon2.get(i).getHpAtual());
+            System.out.println(">Hp max: >"+ listPokemon2.get(i).getHpMax());
+            System.out.println(">Level: "+ listPokemon2.get(i).getLevel());
+            System.out.println(">Accuracy Modifier: "+ listPokemon2.get(i).getModifierAccuracy());
+            System.out.println(">Atk Modifier: "+ listPokemon2.get(i).getModifierAtk());
+            System.out.println(">Def Modifier: "+ listPokemon2.get(i).getModifierDef());
+            System.out.println(">Evasion Modifier: "+ listPokemon2.get(i).getModifierEvasion());
+            System.out.println(">Spd Modifier: "+ listPokemon2.get(i).getModifierSpd());
+            System.out.println(">Spe Modifier: "+ listPokemon2.get(i).getModifierSpe());
+            System.out.println(">Spd: "+ listPokemon2.get(i).getSpd());
+            System.out.println(">Spe: "+ listPokemon2.get(i).getSpe());
+            System.out.println(">Status: "+ listPokemon2.get(i).getStatus());
+            System.out.println();
         }
         System.out.println();
     }

@@ -210,7 +210,7 @@ public class Pokemon {
     public void setAtaque(Ataque ataque) {
         this.ataque.add(ataque);
         for (Ataque a: this.ataque) {
-            System.out.println(a.getNome());
+            //System.out.println(a.getNome());
         }
     }
 
