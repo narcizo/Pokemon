@@ -1,16 +1,51 @@
 package Pokemon;
+import Enum.Tipo;
 
 public class Especie {
     private int id;
     private String nome;
+    private Tipo tipo;
+    private Tipo tipo2;
     private double baseHp;
     private double baseAtk;
     private double baseDef;
     private double baseSpe;
     private double baseSpd;
 
-    public double calcularAtributos(){
-        return 0;
+    public Especie(String[][] tabelaEspecie, int i){
+        this.id = Integer.parseInt(tabelaEspecie[i][0]);
+        this.nome = tabelaEspecie[i][1];
+        this.tipo = Tipo.valueOf(tabelaEspecie[i][2]);
+        if(tabelaEspecie[i][3].equals("")) this.tipo2 = Tipo.valueOf("None");
+        else this.tipo2 = Tipo.valueOf(tabelaEspecie[i][3]);
+        this.baseHp = Integer.parseInt(tabelaEspecie[i][4]);
+        this.baseAtk = Integer.parseInt(tabelaEspecie[i][5]);
+        this.baseDef = Integer.parseInt(tabelaEspecie[i][6]);
+        this.baseSpe = Integer.parseInt(tabelaEspecie[i][7]);
+        this.baseSpd = Integer.parseInt(tabelaEspecie[i][8]);
+    }
+
+    public double calcularHP(int level){
+        return (2 * this.baseHp * level)/(100 + level + 10);
+    }
+
+    public double calcularAtributos(int level, String chave){
+        double ret = 0;
+        switch (chave){
+            case "atk":
+                ret = baseAtk;
+                break;
+            case "def":
+                ret = baseDef;
+                break;
+            case "spe":
+                ret = baseSpe;
+                break;
+            case "spd":
+                ret = baseSpd;
+                break;
+        }
+        return (2 * ret * level)/ 105;
     }
 
     public int getId() {
@@ -67,5 +102,21 @@ public class Especie {
 
     public void setBaseSpd(double baseSpd) {
         this.baseSpd = baseSpd;
+    }
+
+    public Tipo getTipo1() {
+        return tipo;
+    }
+
+    public void setTipo1(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public Tipo getTipo2() {
+        return tipo2;
+    }
+
+    public void setTipo2(Tipo tipo2) {
+        this.tipo2 = tipo2;
     }
 }

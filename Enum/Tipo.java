@@ -1,21 +1,20 @@
 package Enum;
 
 public enum Tipo {
-    NOME,
-    BUG,
-    DRAGON,
-    ELETRIC,
-    FIGHTING,
-    FIRE,
-    FLYING,
-    ICE,
-    GHOST,
-    GRASS,
-    GROUND,
-    NORMAL,
-    POISON,
-    PSYCHIC,
-    ROCK,
-    WATER;
-
+    None,
+    Bug,
+    Dragon,
+    Eletric,
+    Fighting,
+    Fire,
+    Flying,
+    Ice,
+    Ghost,
+    Grass,
+    Ground,
+    Normal,
+    Poison,
+    Psychic,
+    Rock,
+    Water;
 }

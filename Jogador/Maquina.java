@@ -5,6 +5,6 @@ import Jogador.Jogador;
 public class Maquina extends Jogador {
 
     public void escolherComando(){
-
+        System.out.println("Maquina");
     }
 }

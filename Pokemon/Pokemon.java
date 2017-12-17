@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import Ataque.Ataque;
 import Enum.Status;
-import Enum.Tipo;
+
+
+import static sun.swing.MenuItemLayoutHelper.max;
 
 public class Pokemon {
     private String nome;
@@ -25,20 +27,47 @@ public class Pokemon {
     private boolean flinch;
     List<Ataque> ataque = new ArrayList<Ataque>();
     Status status;
-    Tipo tipo;
+    Especie especie;
 
-    public Pokemon(String hp, String atk, String def, String spe, String spd, String nome, int level){
-        this.hpMax = Integer.parseInt(hp);
-        this.atk = Integer.parseInt(atk);
-        this.def = Integer.parseInt(def);
-        this.spe = Integer.parseInt(spe);
-        this.spd = Integer.parseInt(spd);
-        this.nome = nome;
+    public Pokemon(String[][] tabelaEspecie, int i, int level){
+        especie = new Especie(tabelaEspecie, i);
         this.level = level;
+        this.hpMax = especie.calcularHP(level);
+        this.hpAtual = this.hpMax;
+        this.atk = especie.calcularAtributos(level, "atk");
+        this.def = especie.calcularAtributos(level, "def");
+        this.spe = especie.calcularAtributos(level, "spe");
+        this.spd = especie.calcularAtributos(level, "spd");
+        this.nome = tabelaEspecie[i][1];
+        this.modifierAccuracy = 0;
+        this.modifierEvasion = 0;
+        this.modifierAtk = 0;
+        this.modifierDef = 0;
+        this.modifierSpe = 0;
+        this.modifierSpd = 0;
+        this.status = Status.valueOf("OK");
+        this.confusion = false;
+        this.flinch = false;
     }
 
-    public double valorAtributo(){
-        return 0;
+    public double valorAtributo(int modifier, String chave){
+        int ret = 0;
+
+        switch (chave){
+            case "atk":
+                ret = modifierAtk;
+                break;
+            case "def":
+                ret = modifierDef;
+                break;
+            case "spe":
+                ret = modifierSpe;
+                break;
+            case "spd":
+                ret = modifierSpd;
+                break;
+        }
+        return ret *( max(2,2+modifier)/max(max(2,2-modifier)));
     }
 
     public String getNome() {
@@ -185,12 +214,24 @@ public class Pokemon {
         }
     }
 
-    public Enum getStatus() {
-        return status;
+    public void setAtaque(List<Ataque> ataque) {
+        this.ataque = ataque;
     }
 
-    public Enum getTipo() {
-        return tipo;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(Especie especie) {
+        this.especie = especie;
+    }
+
+    public Enum getStatus() {
+        return status;
     }
 
 }

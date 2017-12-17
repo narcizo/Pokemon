@@ -1,7 +1,9 @@
 package Jogador;
 
 public class Humano extends Jogador {
-    public void escolherComando(){
 
+    @Override
+    public void escolherComando(){
+        System.out.println("Humano");
     }
 }

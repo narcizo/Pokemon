@@ -18,6 +18,16 @@ import Ataque.AtaqueStatus;
 import Ataque.AtaqueCharge;
 
 public class Batalha {
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+
     private BufferedReader conteudoCsv = null;
     private String linha;
     private String separador = "\t";
@@ -46,7 +56,7 @@ public class Batalha {
                 i++;
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo nao encontrado: \n" + e.getMessage());
+            System.out.println(RED + "Arquivo nao encontrado: \n" + RESET + e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Indice fora do limite: \n" + e.getMessage());
         } catch (IOException e) {
@@ -70,13 +80,13 @@ public class Batalha {
         Pokemon poke;
 
         if(i>1 && i<153) {
-            System.out.println("seu pokemon e: " + tabelaEspecie[i][1]);
+            System.out.println(PURPLE + "seu pokemon e: " + tabelaEspecie[i][1] + RESET);
             do{
                 System.out.println("Escolha um level entre 1 e 100");
                 a = input.nextInt();
             }while(a < 0 || a > 100);
 
-            poke = new Pokemon(tabelaEspecie[i][4], tabelaEspecie[i][5], tabelaEspecie[i][6], tabelaEspecie[i][7], tabelaEspecie[i][8], tabelaEspecie[i][1], a);
+            poke = new Pokemon(tabelaEspecie, i, a);
 
             do{
                 System.out.println("Escolha os ataques entre 0 a 165");
@@ -84,7 +94,7 @@ public class Batalha {
                 if(a>0 && a <= 165)
                     poke.setAtaque(criaAtaque(a));
                 else
-                    System.out.println("Ataque invalido.");
+                    System.out.println(RED + "Ataque invalido." + RESET);
             }while(a >= 0 && ++cont < 3);
 
             if(chave == 1)
@@ -94,7 +104,7 @@ public class Batalha {
 
         }
         else
-            System.out.println("Escolha um Pokemon valido.");
+            System.out.println(RED + "Escolha um Pokemon valido." + RESET);
     }
 
     public Ataque criaAtaque(int i){
@@ -160,7 +170,6 @@ public class Batalha {
         System.out.println("Jogador 1");
         for(int i = 0; i < this.jogador1.size(); i++){
             System.out.println(">Nome: "+jogador1.get(i).getNome());
-            System.out.println(">Tipo: "+jogador1.get(i).getTipo());
             System.out.println(">Habilidades: " + jogador1.get(i).getAtaque());
             for (Ataque j: jogador1.get(i).getAtaque()) {
                 System.out.println(">>>Id: " + j.getId());
@@ -168,12 +177,6 @@ public class Batalha {
                 System.out.println(">>>PPMax: " + j.getPpMax());
                 System.out.println(">>>Power: " + j.getPower());
             }
-            /*for (int j = 0; i < this.jogador1.get(i).getAtaque().size(); j++){
-                System.out.println(">>>Id: " + jogador1.get(i).getAtaque().get(j).getNome());
-                System.out.println(">>>Nome : " + jogador1.get(i).getAtaque().get(j).getNome());
-                System.out.println(">>>PPMax: " + jogador1.get(i).getAtaque().get(j).getPpMax());
-                System.out.println(">>>Power: " + jogador1.get(i).getAtaque().get(j).getPower());
-            }*/
             System.out.println(">Atk: "+jogador1.get(i).getAtk());
             System.out.println(">Def: "+jogador1.get(i).getDef());
             System.out.println(">Hp atual:"+jogador1.get(i).getHpAtual());
@@ -194,7 +197,6 @@ public class Batalha {
         System.out.println("Jogador 2");
         for(int i = 0; i < this.jogador2.size(); i++){
             System.out.println(">Nome: "+jogador2.get(i).getNome());
-            System.out.println(">Tipo: "+jogador2.get(i).getTipo());
             System.out.println(">Habilidades: " + jogador2.get(i).getAtaque());
             for (Ataque j: jogador2.get(i).getAtaque()) {
                 System.out.println(">>>Id: " + j.getId());
@@ -202,12 +204,6 @@ public class Batalha {
                 System.out.println(">>>PPMax: " + j.getPpMax());
                 System.out.println(">>>Power: " + j.getPower());
             }
-            /*for (int j = 0; i < this.jogador2.get(i).getAtaque().size(); j++){
-                System.out.println(">>>Id: " + jogador2.get(i).getAtaque().get(j).getNome());
-                System.out.println(">>>Nome : " + jogador2.get(i).getAtaque().get(j).getNome());
-                System.out.println(">>>PPMax: " + jogador2.get(i).getAtaque().get(j).getPpMax());
-                System.out.println(">>>Power: " + jogador2.get(i).getAtaque().get(j).getPower());
-            }*/
             System.out.println(">Atk: "+jogador2.get(i).getAtk());
             System.out.println(">Def: "+jogador2.get(i).getDef());
             System.out.println(">Hp atual:"+jogador2.get(i).getHpAtual());
