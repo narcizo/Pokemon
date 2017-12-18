@@ -4,6 +4,7 @@ import Jogador.Jogador;
 import Jogador.Humano;
 import Jogador.Maquina;
 import Pokemon.Pokemon;
+import Ataque.Ataque;
 import com.sun.org.apache.regexp.internal.RE;
 import com.sun.org.apache.xpath.internal.SourceTree;
 
@@ -53,7 +54,8 @@ public class Main {
         treta.printaListaPokemon();
 
         do {
-            treta.printaListaPokemon();
+            treta.getListPokemon1().get(0).showStatus(treta.getListPokemon1(), 1);
+            treta.getListPokemon2().get(0).showStatus(treta.getListPokemon2(), 2);
             p1 = jogador1.escolherComando(treta.getListPokemon1());
             if(p1 == 2){
                 System.out.println(RED + "Jogador 1 Desistiu." + RESET);
@@ -69,6 +71,15 @@ public class Main {
             }
             if(p2 == 1){
                 jogador1.trocarPokemon(treta.getListPokemon2());
+            }
+            if(p1 == 0){
+                System.out.println(PURPLE+"Ataques Disponiveis"+RESET);
+                for (Pokemon p: treta.getListPokemon1()) {
+                    System.out.println(BLACK + ">"+ RESET + p.getNome());
+                    for (Ataque a: p.getAtaque()) {
+                        System.out.println(YELLOW + ">>>" + RESET + a.getNome() + "["+a.getPpAtual()+"]");
+                    }
+                }
             }
         }while(true);
 

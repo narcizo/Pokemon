@@ -2,14 +2,23 @@ package Ataque;
 
 import Enum.Tipo;
 import Pokemon.Pokemon;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 public class Ataque {
-    public static final String RED = "\u001B[31m";
     public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
 
     private int id;
     private String nome;
@@ -46,13 +55,25 @@ public class Ataque {
             return false;
     }
 
-    public boolean calculoAcerto(){
-        return true;
+    public boolean calculoAcerto(Pokemon atacante, Pokemon defensor, int i){
+        double prob;
+        Random rand = new Random();
+
+        prob = atacante.getAtaque().get(i).getAccuracy() * (tabelaModifier(atacante.getModifierAccuracy()) / tabelaModifier(defensor.getModifierEvasion()));
+
+        if (rand.nextInt(100) < prob){
+            System.out.println(YELLOW + "Acertou!" + RESET);
+            return true;
+        }else {
+            System.out.println(RED + "Errou!" + RESET);
+            return false;
+        }
     }
 
     public double calculoDano(Pokemon atacante, Pokemon defensor, int i){
         double a = 0, d = 0, dano;
         int level = atacante.getLevel();
+        Random rand = new Random();
         double power = atacante.getAtaque().get(i).getPower();
         switch (atacante.getAtaque().get(i).getTipo().toString()){
             case "Nomal":
@@ -132,9 +153,29 @@ public class Ataque {
 
         dano *= danoTipo(atacante.getEspecie().getTipo1().toString(), defensor.getEspecie().getTipo1().toString());
 
+        dano = (dano*(rand.nextInt(38) + 217))/ 255;
         return dano;
     }
 
+    private double tabelaModifier(int modifier){
+        Map<Integer, Double> pos = new HashMap<>();
+
+        pos.put(-6, 0.33);
+        pos.put(-5, 0.37);
+        pos.put(-4, 0.43);
+        pos.put(-3, 0.50);
+        pos.put(-2, 0.60);
+        pos.put(-1, 0.75);
+        pos.put( 0, 1.0);
+        pos.put( 1, 1.33);
+        pos.put( 2, 1.66);
+        pos.put( 3, 2.0);
+        pos.put( 4, 2.33);
+        pos.put( 5, 2.66);
+        pos.put( 6, 3.0);
+
+        return pos.get(modifier);
+    }
     private double danoTipo(String tipo1, String tipo2){
         Map<String, Integer> pos = new HashMap<>();
         double[][] multDano = {{1, 1, 1, 1, 1, 0.5, 1, 0, 1, 1, 1, 1, 1, 1, 1},

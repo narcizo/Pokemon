@@ -9,6 +9,16 @@ import Enum.Status;
 import static sun.swing.MenuItemLayoutHelper.max;
 
 public class Pokemon {
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+
     private String nome;
     private int level;
     private double hpAtual;
@@ -67,7 +77,22 @@ public class Pokemon {
                 ret = modifierSpd;
                 break;
         }
-        return ret *( max(2,2+modifier)/max(max(2,2-modifier)));
+        return ret *( max(2,2+modifier)/max(2,2-modifier));
+    }
+
+    public void showStatus(List<Pokemon> poke, int j){
+        System.out.println(YELLOW + "Jogador " + j + RESET);
+        for (Pokemon i:poke) {
+            System.out.println(BLUE + ">Nome: " + i.getNome() + RESET);
+            System.out.println(BLUE + ">ATK: " + i.valorAtributo(i.getModifierAtk(), "atk") + RESET);
+            System.out.println(BLUE + ">DEF: " + i.valorAtributo(i.getModifierDef(), "def") + RESET);
+            System.out.println(BLUE + ">HP Atual: " + i.getHpAtual() + RESET);
+            System.out.println(BLUE + ">HP Max: " + i.getHpMax() + RESET);
+            System.out.println(BLUE + ">Spe: " + i.valorAtributo(i.getModifierSpe(), "spe") + RESET);
+            System.out.println(BLUE + ">spd: " + i.valorAtributo(i.getModifierSpd(), "spd") + RESET);
+            System.out.println(BLUE + ">Status " + i.getStatus() + RESET);
+            System.out.println();
+        }
     }
 
     public String getNome() {
