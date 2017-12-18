@@ -57,7 +57,7 @@ public class Humano extends Jogador {
         i = 0;
         System.out.println(BLUE + "Qual posiçao deseja trocar?" + RESET);
         for (Pokemon p: poke) {
-            System.out.println(YELLOW + p.getNome() + " " + i++ + RESET);
+            System.out.println(YELLOW + p.getNome() + ", " + p.getStatus() + " " + i++ + RESET);
         }
         i = scan.nextInt();
         if(i < 0 || i > poke.size() - 1) {
@@ -65,7 +65,12 @@ public class Humano extends Jogador {
             trocarPokemon(poke);
         }
         else{
-            Collections.swap(poke, 0, i);
+            if(poke.get(i).getStatus().toString().equals("FAINTED")){
+                System.out.println(RED + "Esse Pokemon nao esta em condiçoes de batalhar." + RESET);
+                trocarPokemon(poke);
+            }
+            else
+                Collections.swap(poke, 0, i);
         }
     }
 }

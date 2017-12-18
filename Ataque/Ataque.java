@@ -71,12 +71,12 @@ public class Ataque {
     }
 
     public double calculoDano(Pokemon atacante, Pokemon defensor, int i){
-        double a = 0, d = 0, dano;
+        double a = 0, d = 0, dano = 0;
         int level = atacante.getLevel();
         Random rand = new Random();
         double power = atacante.getAtaque().get(i).getPower();
         switch (atacante.getAtaque().get(i).getTipo().toString()){
-            case "Nomal":
+            case "Normal":
                 a = atacante.getAtk();
                 d = defensor.getDef();
                 break;
@@ -116,7 +116,7 @@ public class Ataque {
                 a = atacante.getSpe();
                 d = defensor.getSpe();
                 break;
-            case "Eletric":
+            case "Electric":
                 a = atacante.getSpe();
                 d = defensor.getSpe();
                 break;
@@ -137,7 +137,7 @@ public class Ataque {
                 d = defensor.getSpe();
                 break;
         }
-        if(calculoCritico(atacante.getSpd())) level *= level;
+        if(calculoCritico(atacante.getSpd())) level *= 2;
 
         if(atacante.getStatus().toString().equals("Burned")) a /= 2;
 
@@ -153,7 +153,15 @@ public class Ataque {
 
         dano *= danoTipo(atacante.getEspecie().getTipo1().toString(), defensor.getEspecie().getTipo1().toString());
 
+        //System.out.println("dano: " + dano);
         dano = (dano*(rand.nextInt(38) + 217))/ 255;
+
+        //System.out.println("level " + level);
+        //System.out.println("a " + a);
+        //System.out.println("power " + power);
+        //System.out.println("d " +d);
+        System.out.println();
+        System.out.println(PURPLE + "Dano: " + dano + RESET);
         return dano;
     }
 
@@ -206,11 +214,13 @@ public class Ataque {
         pos.put("Fire" , 8);
         pos.put("Water", 9);
         pos.put("Grass", 10);
-        pos.put("Eletric", 11);
+        pos.put("Electric", 11);
         pos.put("Psychic", 12);
         pos.put("Ice", 13);
         pos.put("Dragon", 14);
 
+        //System.out.println("tipo 1: " + tipo1);
+        //System.out.println("tipo 2: " + tipo2);
         return multDano[pos.get(tipo1)][pos.get(tipo2)];
     }
 

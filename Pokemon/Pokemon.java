@@ -82,17 +82,17 @@ public class Pokemon {
 
     public void showStatus(List<Pokemon> poke, int j){
         System.out.println(YELLOW + "Jogador " + j + RESET);
-        for (Pokemon i:poke) {
-            System.out.println(BLUE + ">Nome: " + i.getNome() + RESET);
-            System.out.println(BLUE + ">ATK: " + i.valorAtributo(i.getModifierAtk(), "atk") + RESET);
-            System.out.println(BLUE + ">DEF: " + i.valorAtributo(i.getModifierDef(), "def") + RESET);
-            System.out.println(BLUE + ">HP Atual: " + i.getHpAtual() + RESET);
-            System.out.println(BLUE + ">HP Max: " + i.getHpMax() + RESET);
-            System.out.println(BLUE + ">Spe: " + i.valorAtributo(i.getModifierSpe(), "spe") + RESET);
-            System.out.println(BLUE + ">spd: " + i.valorAtributo(i.getModifierSpd(), "spd") + RESET);
-            System.out.println(BLUE + ">Status " + i.getStatus() + RESET);
+        //for (Pokemon i:poke) {
+            System.out.println(PURPLE + ">Nome: " + poke.get(0).getNome() + RESET);
+            System.out.println(BLUE + ">ATK: " + poke.get(0).valorAtributo(poke.get(0).getModifierAtk(), "atk") + RESET);
+            System.out.println(BLUE + ">DEF: " + poke.get(0).valorAtributo(poke.get(0).getModifierDef(), "def") + RESET);
+            System.out.println(BLUE + ">HP Atual: " + poke.get(0).getHpAtual() + RESET);
+            System.out.println(BLUE + ">HP Max: " + poke.get(0).getHpMax() + RESET);
+            System.out.println(BLUE + ">Spe: " + poke.get(0).valorAtributo(poke.get(0).getModifierSpe(), "spe") + RESET);
+            System.out.println(BLUE + ">spd: " + poke.get(0).valorAtributo(poke.get(0).getModifierSpd(), "spd") + RESET);
+            System.out.println(BLUE + ">Status " + poke.get(0).getStatus() + RESET);
             System.out.println();
-        }
+        //}
     }
 
     public String getNome() {
