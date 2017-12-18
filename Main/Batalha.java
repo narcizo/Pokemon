@@ -119,7 +119,7 @@ public class Batalha {
             poke = new Pokemon(tabelaEspecie, i, a);
 
             do{
-                System.out.println("Escolha os ataques entre 0 a 165");
+                System.out.println(CYAN + "Escolha os ataques entre 0 a 165" + RESET);
                 a = input.nextInt();
                 if(a>0 && a <= 165)
                     poke.setAtaque(criaAtaque(a));

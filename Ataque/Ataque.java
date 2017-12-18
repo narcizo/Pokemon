@@ -160,8 +160,10 @@ public class Ataque {
         //System.out.println("a " + a);
         //System.out.println("power " + power);
         //System.out.println("d " +d);
-        System.out.println();
+        //System.out.println();
         System.out.println(PURPLE + "Dano: " + dano + RESET);
+        System.out.println();
+        System.out.println();
         return dano;
     }
 
