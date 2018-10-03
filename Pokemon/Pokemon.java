@@ -5,7 +5,6 @@ import java.util.List;
 import Ataque.Ataque;
 import Enum.Status;
 
-
 import static sun.swing.MenuItemLayoutHelper.max;
 
 public class Pokemon {
@@ -77,6 +76,7 @@ public class Pokemon {
                 ret = modifierSpd;
                 break;
         }
+        
         return ret *( max(2,2+modifier)/max(2,2-modifier));
     }
 
