@@ -18,8 +18,7 @@ public class Humano extends Jogador {
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
 
-    public Humano() {
-    }
+    public Humano() { }
 
     @Override
     public int escolherComando(List<Pokemon> jogador){
@@ -51,10 +50,8 @@ public class Humano extends Jogador {
 
     @Override
     public void trocarPokemon(List<Pokemon> poke){
-        int i;
+        int i = 0;
         Scanner scan = new Scanner(System.in);
-
-        i = 0;
         System.out.println(BLUE + "Qual posiçao deseja trocar?" + RESET);
         for (Pokemon p: poke) {
             System.out.println(YELLOW + p.getNome() + ", " + p.getStatus() + " " + i++ + RESET);
