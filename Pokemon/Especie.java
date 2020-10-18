@@ -11,6 +11,7 @@ public class Especie {
     private double baseDef;
     private double baseSpe;
     private double baseSpd;
+    private double olhaSo;
 
     public Especie(String[][] tabelaEspecie, int i){
         this.id = Integer.parseInt(tabelaEspecie[i][0]);
@@ -23,6 +24,7 @@ public class Especie {
         this.baseDef = Integer.parseInt(tabelaEspecie[i][6]);
         this.baseSpe = Integer.parseInt(tabelaEspecie[i][7]);
         this.baseSpd = Integer.parseInt(tabelaEspecie[i][8]);
+        this.olhaSo = 69;
     }
 
     public double calcularHP(int level){
