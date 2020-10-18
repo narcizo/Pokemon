@@ -24,7 +24,7 @@ public class Especie {
         this.baseDef = Integer.parseInt(tabelaEspecie[i][6]);
         this.baseSpe = Integer.parseInt(tabelaEspecie[i][7]);
         this.baseSpd = Integer.parseInt(tabelaEspecie[i][8]);
-        this.olhaSo = 69;
+        this.olhaSo = 1231;
     }
 
     public double calcularHP(int level){
